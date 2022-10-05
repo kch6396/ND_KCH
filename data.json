@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "name": "Origin",
+      "Performance": 95
+    },
+    {
+      "name": "A",
+      "Performance": 94
+    },
+    {
+      "name": "B",
+      "Performance": 93
+    },
+    {
+      "name": "C",
+      "Performance": 96
+    },
+    {
+      "name": "D",
+      "Performance": 95.5
+    },
+    {
+      "name": "E",
+      "Performance": 90
+    },
+    {
+      "name": "F",
+      "Performance": 50
+    }
+  ]
+}

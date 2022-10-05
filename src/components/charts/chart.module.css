@@ -1,0 +1,19 @@
+.title {
+  /* margin: auto; */
+  text-align: center;
+  font-size: 25px;
+}
+
+.sub {
+  text-align: center;
+}
+
+.unit {
+  text-align: center;
+}
+
+.one {
+  margin: auto;
+  width: 45%;
+  min-width: 500px;
+}

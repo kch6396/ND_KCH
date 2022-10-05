@@ -1,0 +1,38 @@
+.theme {
+  list-style-type: none;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  padding: 20px;
+}
+
+.allchart {
+  /* width: 80%; */
+  /* height: 90vh; */
+  /* z-index: 10; */
+}
+.chart1 {
+  display: flex;
+  margin-bottom: 30px;
+}
+.chart2 {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.btns {
+  display: flex;
+  justify-content: space-around;
+  width: 250px;
+  float: right;
+  margin-right: 60px;
+}
+.btns input {
+  padding: 10px 30px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+.btns input:hover {
+  background-color: #777;
+}

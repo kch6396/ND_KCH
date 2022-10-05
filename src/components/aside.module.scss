@@ -1,0 +1,43 @@
+aside {
+  width: 20%;
+  height: 100%;
+  // background-color: #ffd801;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  .table {
+    width: 95%;
+    height: 90%;
+    border: 2px solid #49277f;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    .task {
+      border-bottom: 2px solid black;
+      padding: 5px 0;
+      h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 0;
+      }
+    }
+  }
+  .btn {
+    width: 95%;
+    height: 5%;
+    display: flex;
+    justify-content: space-between;
+    button {
+      width: 30%;
+      background-color: white;
+      border: 2px solid #49277f;
+      // border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      color: #333;
+      font-family: "Lexend Deca", sans-serif;
+      font-weight: 600;
+    }
+  }
+}

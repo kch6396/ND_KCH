@@ -1,0 +1,72 @@
+@media (prefers-reduced-motion: no-preference) {
+  .App_logo {
+    animation: App-logo-spin infinite 10s linear;
+  }
+}
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.App_logo {
+  width: 20%;
+  margin: auto;
+}
+.process {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 95%;
+}
+.bar {
+  height: 40px;
+  width: 70%;
+  margin: auto;
+  margin-top: 0;
+  /* background-color: #d3d3d3; */
+  /* border: 2px solid #333; */
+  font-size: 20px;
+  font-weight: bold;
+}
+.complete {
+  height: 40px;
+  width: 70%;
+  margin: auto;
+  /* margin-top: 0; */
+  /* background-color: #d3d3d3; */
+  /* border: 2px solid #333; */
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.result__btn {
+  width: 125px;
+  padding: 10px 30px;
+  border-radius: 10px;
+}
+.processing {
+  height: 93.2%;
+}
+
+.process__btn {
+  width: 180px;
+  padding: 20px;
+  border: 3px solid #337ab7;
+  border-radius: 0.25em;
+  font-weight: 700;
+  /* float: right; */
+  /* margin-right: 50px; */
+  display: inherit;
+  background-color: #337ab7;
+  color: white;
+  margin: auto;
+}
+
+.process__btn:hover {
+  background-color: #2e6da4;
+  border: 3px solid #2e6da4;
+}

@@ -1,0 +1,86 @@
+.xfile-list {
+  overflow: auto;
+  max-height: 80%;
+}
+.yfile-list {
+  overflow: auto;
+  max-height: 80%;
+}
+.xlabel {
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0 20px;
+  min-width: 50px;
+}
+.ylabel {
+  margin-bottom: 1rem;
+  text-align: center;
+  padding: 0 20px;
+  min-width: 50px;
+}
+
+.filebox {
+  margin-bottom: 10px;
+}
+
+.checkbox {
+  margin: auto;
+  width: 95%;
+  height: 10%;
+  background-color: white;
+  position: relative;
+  padding: 35px 0;
+}
+.go {
+  margin: auto;
+  width: 95%;
+  height: 10%;
+  background-color: #333;
+}
+
+#form {
+  overflow: auto;
+  height: 100%;
+  /* direction: rtl; */
+}
+#yform {
+  overflow: auto;
+  max-height: 80%;
+}
+/* #xform::-webkit-scrollbar {
+  position: relative;
+  left: 0px;
+  z-index: 10;
+} */
+
+.resetbtn {
+  width: 130px;
+  padding: 15px;
+  background-color: #d9534f;
+  /* border: 3px solid white; */
+  border: none;
+  border-radius: 0.25em;
+  float: right;
+  margin-right: 10px;
+  color: white;
+  font-weight: 600;
+}
+
+.resetbtn:hover {
+  background-color: #d43f3a;
+}
+
+.innerBox {
+  display: inline-flex;
+  margin-right: 20px;
+}
+.checkname {
+  font-size: 15px;
+  color: #333;
+  pointer-events: none;
+  font-weight: 600;
+}
+
+.checkrec {
+  width: 15px;
+}
