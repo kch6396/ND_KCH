@@ -2,12 +2,14 @@ import chain from "../chain.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
-import styles from "./process.module.css";
+import styles from "./css/process.module.css";
+import "./css/process.css";
 
-import "./process.css";
+import { checkAuthenticated } from "../actions/auth";
 
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import Login from "./../containers/Login";
 
 const now = 53;
 
@@ -37,7 +39,34 @@ export default function Process() {
   const [number, setNumber] = useState(0);
   const number_ref = useRef(0);
 
+  const check = async () => {
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      };
+      const body = JSON.stringify({ token: localStorage.getItem("access") });
+      console.log("JSON", body);
+      try {
+        const res = await axios.post(
+          `http://112.221.126.139:10000/api/testing/jwt/verify/`,
+          body,
+          config
+        );
+        console.log("Process_check", res);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("else");
+      window.location.replace("/login");
+    }
+  };
+
   useEffect(() => {
+    check();
     const loop = setInterval(() => {
       if (number_ref.current < 96) {
         number_ref.current += Math.round(Math.random() * (4 - 0) + 0);

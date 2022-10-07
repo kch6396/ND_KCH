@@ -1,4 +1,4 @@
-import styles from "./aside.module.scss";
+import styles from "./css/aside.module.scss";
 
 export default function Aside() {
   return (

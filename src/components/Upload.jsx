@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useNavigate } from "react";
 import { Link } from "react-router-dom";
-import styles from "./upload.module.css";
+import styles from "./css/upload.module.css";
 import $ from "jquery";
 import axios from "axios";
-import "./upload.css";
+import "./css/upload.css";
+import { upload } from "@testing-library/user-event/dist/upload";
 
 var xfilesArr = [];
 var yfilesArr = [];
@@ -17,6 +18,7 @@ var ysuc = 0;
 const xformData = new FormData();
 const yformData = new FormData();
 const checkboxes = document.getElementsByName("check");
+
 export default function Upload() {
   const Data = [
     { id: 1, name: "First" },
@@ -26,6 +28,32 @@ export default function Upload() {
     { id: 5, name: "Fifth" },
   ];
 
+  const check = async () => {
+    if (localStorage.getItem("access")) {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      };
+      const body = JSON.stringify({ token: localStorage.getItem("access") });
+      console.log("JSON", body);
+      try {
+        const res = await axios.post(
+          `http://112.221.126.139:10000/api/testing/jwt/verify/`,
+          body,
+          config
+        );
+        console.log("Process_check", res);
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      console.log("else");
+      window.location.replace("/login");
+    }
+  };
+  check();
   const [isChecked, setisChecked] = useState(false);
   // const [checkeditemes, setCheckeditemes] = useState(new Set());
 
