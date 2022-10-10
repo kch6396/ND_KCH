@@ -1,7 +1,7 @@
 import chain from "../chain.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./css/process.module.css";
 import "./css/process.css";
 
@@ -16,6 +16,7 @@ const now = 53;
 const testData = [{ bgcolor: "#6a1b9a", completed: 60 }];
 
 export default function Process() {
+  let navigate = useNavigate();
   // const [posts, setPosts] = useState([]);
   // useEffect(() => {
   //   axios
@@ -110,7 +111,7 @@ export default function Process() {
         clearInterval(loop);
         setShow(true);
       }
-    }, 4000);
+    }, 100);
   }, []);
 
   return (
@@ -128,7 +129,11 @@ export default function Process() {
         )}
         {show && (
           <Link to="/chart">
-            <button className={styles.process__btn} id="process__btn">
+            <button
+              className={styles.process__btn}
+              id="process__btn"
+              // onClick={() => navigate("chart")}
+            >
               결과 확인
             </button>
           </Link>

@@ -4,3 +4,10 @@
   padding: 0.5rem 2rem;
   z-index: 10;
 }
+
+.nav_title {
+  font-size: 25px;
+  padding: 0.5rem 1rem;
+  color: #49277f;
+  font-weight: 900px;
+}

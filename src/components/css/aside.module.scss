@@ -14,6 +14,7 @@ aside {
     border-radius: 10px;
     background-color: white;
     text-align: center;
+    margin: auto;
     .task {
       border-bottom: 2px solid black;
       padding: 5px 0;
@@ -29,6 +30,7 @@ aside {
     height: 5%;
     display: flex;
     justify-content: space-between;
+    margin: auto;
     margin-top: 15px;
     button {
       width: 30%;

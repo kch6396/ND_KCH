@@ -29,9 +29,7 @@ const Navbar = ({ logout, isAuthenticated }) => {
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <Link className="navbar-brand" to="/">
-        Navbar
-      </Link>
+      <div className="nav_title">NeuralDrop</div>
       <button
         className="navbar-toggler"
         type="button"

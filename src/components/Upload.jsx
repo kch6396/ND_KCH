@@ -122,6 +122,8 @@ export default function Upload() {
               className="checkrec"
               value={item.name}
               onChange={(e) => checkHandler(e)}
+              // checked
+              disabled=""
             />
             <div className="checkname">{item.name}</div>
           </label>
@@ -415,6 +417,8 @@ $(function () {
                 xsuc++;
               }
               z++;
+              console.log("xfile", xsuc, xdel);
+              console.log("xfilelength", xstate.length);
               if (
                 xsuc + xdel === xstate.length &&
                 ysuc + ydel === ystate.length
@@ -497,6 +501,8 @@ $(function () {
                 ysuc++;
               }
               k++;
+              console.log("file", ysuc, ydel);
+              console.log("filelength", ystate.length);
               if (
                 xsuc + xdel === xstate.length &&
                 ysuc + ydel === ystate.length
@@ -530,6 +536,7 @@ $(function () {
       $("#xfile").attr("disabled", false);
       $("#yfile").attr("disabled", false);
       $("#ok__btn").attr("disabled", false);
+      $(".checkrec").attr("disabled", false);
     });
     if (xfilesArr.length !== 0 && xdeletefile !== xfilesArr.length) {
       // $("#ok__btn").attr("disabled", true);
@@ -566,6 +573,7 @@ $(function () {
       return false;
     } else {
       checkcnt = 0;
+      $(".checkrec").attr("disabled", true);
     }
     // checkcnt = 0;
     var xdelfile = 0;
@@ -582,11 +590,14 @@ $(function () {
     }
     if (!yfilesArr.length || yfilesArr.length === ydelfile) {
       alert("파일을 첨부해주세요.");
+      $(".checkrec").attr("disabled", false);
       return false;
     } else if (!xfilesArr.length || xfilesArr.length === xdelfile) {
       alert("파일을 첨부해주세요.");
+      $(".checkrec").attr("disabled", false);
       return false;
     } else {
+      $(".checkrec").attr("disabled", true);
       return true;
     }
   });

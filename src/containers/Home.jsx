@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import "../components/css/home.css";
 export default function Home() {
   return (
     <div className="container">
