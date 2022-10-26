@@ -11,13 +11,9 @@ header {
   position: relative;
   z-index: 10;
   height: 10%;
-  // background-color: #eee;
   min-height: 80px;
   width: 100%;
   min-width: 1550px;
-  // border-bottom: 1px solid #333;
-  // display: flex;
-  // justify-content: space-between;
   -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 12%);
   .inner {
     position: relative;
@@ -38,7 +34,6 @@ header {
           font-weight: bold;
           margin-bottom: 0px;
           color: #49277f;
-          // text-decoration: underline;
         }
         .user_name {
           display: flex;
@@ -56,7 +51,6 @@ header {
             white-space: nowrap;
             a {
               color: #ffd801;
-              // color:#fbb917;
             }
           }
         }
@@ -68,11 +62,9 @@ header {
       height: 85%;
       width: 1250px;
       justify-content: center;
-      // margin-right:200px;
       ul {
         display: flex;
         margin-bottom: 0px;
-        // align-items: flex-end;
         li {
           padding: 0 25px;
           font-size: 18px;
@@ -117,9 +109,6 @@ header {
           #underline::before {
             width: 50%;
           }
-        }
-        li:first-child {
-          // padding-left:50px;
         }
         li:last-child {
           padding-right: 10px;

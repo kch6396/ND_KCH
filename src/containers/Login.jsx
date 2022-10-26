@@ -23,6 +23,7 @@ const Login = ({ login, isAuthenticated }) => {
   }
 
   useEffect(() => {
+    setTimeout(() => {}, 1000);
     if (isAuthenticated) {
       return navigate("/MainPage");
     }

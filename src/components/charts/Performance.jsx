@@ -7,12 +7,9 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  // Legend,
   ResponsiveContainer,
   Cell,
-  LabelList,
 } from "recharts";
-// import { toBePartiallyChecked } from "@testing-library/jest-dom/dist/matchers";
 
 const barColors = [
   "#8BCBFE",
@@ -59,7 +56,6 @@ export default class Performance extends PureComponent {
   render() {
     return (
       <div className={styles.one}>
-        {/* <div> */}
         <h1 className={styles.title}>Performance 비교</h1>
         <ResponsiveContainer width="100%" height={200}>
           <BarChart
@@ -69,8 +65,6 @@ export default class Performance extends PureComponent {
             margin={{
               top: 5,
               right: 30,
-              // left: 20,
-              // bottom: 5,
             }}
             barSize={35}
           >
@@ -84,22 +78,12 @@ export default class Performance extends PureComponent {
               contentStyle={{
                 backgroundColor: "#D8F1FE",
                 border: "3px solid #8BCBFE",
-                // borderColor: "#8BCBFE",
                 borderRadius: "5px",
               }}
             />
-            {/* <Legend
-              payload={data.map((item, index) => ({
-                id: item.name,
-                type: "square",
-                value: `Performance(%)`,
-                color: "#3F97FC",
-              }))}
-            /> */}
             <CartesianGrid strokeDasharray="3 3" />
             <Bar
               dataKey="Performance"
-              // fill="#8884d8"
               background={{ fill: "#eee" }}
               label={{ position: "insideTop", fill: "white" }}
             >
@@ -110,9 +94,7 @@ export default class Performance extends PureComponent {
           </BarChart>
         </ResponsiveContainer>
         <div className={styles.unit}>단위:Performance(%)</div>
-        {/* <h4 className="sub">기존 모델과 6가지 압축기술이 적용된 모델</h4> */}
       </div>
-      // </div>
     );
   }
 }

@@ -1,11 +1,10 @@
 import "./css/mainPage.css";
 import axios from "axios";
-
-import Header from "./Header";
 import Section from "./Section";
-import Footer from "./Footer";
+import { logout } from "../actions/auth";
+import { connect } from "react-redux";
 
-export default function mainPage() {
+const mainPage = ({ logout }) => {
   const check = async () => {
     if (localStorage.getItem("access")) {
       const config = {
@@ -15,7 +14,6 @@ export default function mainPage() {
         },
       };
       const body = JSON.stringify({ token: localStorage.getItem("access") });
-      console.log("JSON", body);
       try {
         const res = await axios.post(
           `http://112.221.126.139:10000/api/testing/jwt/verify/`,
@@ -25,19 +23,25 @@ export default function mainPage() {
         console.log("Process_check", res);
       } catch (err) {
         console.log(err);
+        logout();
+        // window.location.replace("/login");
       }
     } else {
       console.log("else");
-      window.location.replace("/login");
+      logout();
+      // window.location.replace("/login");
     }
   };
   check();
+
   return (
-    // <div className="main">
     <>
-      {/* <Header /> */}
       <Section />
-      {/*</div> */}
     </>
   );
-}
+};
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps, { logout })(mainPage);

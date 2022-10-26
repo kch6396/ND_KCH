@@ -4,7 +4,16 @@ import Size from "./charts/Size";
 import Computation from "./charts/Computation";
 import styles from "./css/allchart.module.css";
 import axios from "axios";
+import useFetch from "../hocs/useFetch";
+import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
 export default function Chart() {
+  const taskcheck = useParams().id;
+  const userId = localStorage.getItem("id");
+  const tasks = useFetch(
+    `http://112.221.126.139:10000/api/Testing/${userId}/${taskcheck}`
+  );
+
   const check = async () => {
     if (localStorage.getItem("access")) {
       const config = {
@@ -27,10 +36,33 @@ export default function Chart() {
       }
     } else {
       console.log("else");
-      window.location.replace("/login");
+      // window.location.replace("/login");
     }
   };
   check();
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      axios
+        .put(
+          `http://112.221.126.139:10000/api/Testing/${userId}/${taskcheck}`,
+          {
+            config,
+            state: "Chart",
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   return (
     <div className={styles.allchart}>
       <li className={styles.theme}>기존 모델과 6가지 압축기술이 적용된 모델</li>

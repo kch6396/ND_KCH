@@ -1,40 +1,15 @@
 import chain from "../chain.png";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./css/process.module.css";
-import "./css/process.css";
-
+import useFetch from "../hocs/useFetch";
 import { checkAuthenticated } from "../actions/auth";
 
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import Login from "./../containers/Login";
-
-const now = 53;
-
-const testData = [{ bgcolor: "#6a1b9a", completed: 60 }];
 
 export default function Process() {
-  let navigate = useNavigate();
-  // const [posts, setPosts] = useState([]);
-  // useEffect(() => {
-  //   axios
-  //     // .get("https://jsonplaceholder.typicode.com/posts")
-  //     .get("")
-  //     .then((res) => {
-  //       console.log(res);
-  //       setPosts(res.data);
-  //       var keys = Object.keys(res.data);
-  //       console.log(keys);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-
-  //   console.log(posts.findIndex);
-  // });
-
   const [show, setShow] = useState(false);
 
   const [number, setNumber] = useState(0);
@@ -62,7 +37,7 @@ export default function Process() {
       }
     } else {
       console.log("else");
-      window.location.replace("/login");
+      // window.location.replace("/login");
     }
   };
 
@@ -73,12 +48,7 @@ export default function Process() {
         number_ref.current += Math.round(Math.random() * (4 - 0) + 0);
         setNumber(number_ref.current);
         setShow(false);
-      }
-      // number_ref.current += 1;
-      // setNumber(number_ref.current);
-      // console.log("number", number);
-      // console.log(number_ref.current);
-      else if (
+      } else if (
         number_ref.current === 99 &&
         number_ref.current !== 98 &&
         number_ref.current !== 97 &&
@@ -111,7 +81,38 @@ export default function Process() {
         clearInterval(loop);
         setShow(true);
       }
-    }, 100);
+    }, 6000);
+  }, []);
+  const taskcheck = useParams().id;
+  const userId = localStorage.getItem("id");
+  const tasks = useFetch(
+    `http://112.221.126.139:10000/api/Testing/${userId}/${taskcheck}`
+  );
+  const task_name = tasks.Taskname;
+  const formData = new FormData();
+  formData.append("Taskname", task_name);
+  formData.append("state", "Process");
+  useEffect(() => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      axios
+        .put(
+          `http://112.221.126.139:10000/api/Testing/${userId}/${taskcheck}`,
+          {
+            config,
+            state: "Process",
+          }
+        )
+        .then((res) => {
+          console.log(res);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   }, []);
 
   return (
@@ -124,33 +125,16 @@ export default function Process() {
             now={number}
             label={`${number}%`}
             max="100"
-            // bgcolor={testData.bgcolor}
           />
         )}
         {show && (
-          <Link to="/chart">
-            <button
-              className={styles.process__btn}
-              id="process__btn"
-              // onClick={() => navigate("chart")}
-            >
+          <Link to={`/task/${tasks.id}/chart`}>
+            <button className={styles.process__btn} id="process__btn">
               결과 확인
             </button>
           </Link>
         )}
       </div>
-      {/* {show && (
-        <Link to="/chart">
-          <button className={styles.process__btn} id="process__btn">
-            결과 확인
-          </button>
-        </Link>
-      )} */}
-      {/* <ul>
-        {posts.map((post) => (
-          <li key={post.id}>{post.title}</li>
-        ))}
-      </ul> */}
     </div>
   );
 }

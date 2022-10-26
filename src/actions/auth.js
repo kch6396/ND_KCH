@@ -1,4 +1,5 @@
 import axios from "axios";
+
 import {
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -33,7 +34,7 @@ export const refreshToken = () => async (dispatch) => {
     try {
       await axios
         .post(
-          `http://112.221.126.139:10000/api/testing/jwt/refresh/`,
+          `http://192.168.123.10:5000/api/testing/jwt/refresh/`,
           token,
           config
         )
@@ -58,7 +59,6 @@ export const refreshToken = () => async (dispatch) => {
 };
 
 export const checkAuthenticated = () => async (dispatch) => {
-  console.log("check");
   if (localStorage.getItem("access")) {
     const config = {
       headers: {
@@ -70,7 +70,7 @@ export const checkAuthenticated = () => async (dispatch) => {
     console.log("JSON", body);
     try {
       const res = await axios.post(
-        `http://112.221.126.139:10000/api/testing/jwt/verify/`,
+        `http://192.168.123.10:5000/api/testing/jwt/verify/`,
         body,
         config
       );
@@ -99,13 +99,14 @@ export const checkAuthenticated = () => async (dispatch) => {
 };
 
 export const load_user = () => async (dispatch) => {
+  console.log("user_load");
   if (localStorage.getItem("access")) {
     try {
       axios.defaults.headers.common[
         "Authorization"
       ] = `JWT ${localStorage.getItem("access")}`;
       await axios
-        .get(`http://112.221.126.139:10000/api/testing/users/me/`)
+        .get(`http://192.168.123.10:5000/api/testing/users/me/`)
         .then(function (res) {
           console.log("load_user", res);
           dispatch({
@@ -115,9 +116,7 @@ export const load_user = () => async (dispatch) => {
         });
     } catch (err) {
       console.log(err);
-      dispatch({
-        type: USER_LOADED_FAIL,
-      });
+      logout();
     }
   } else {
     dispatch({
@@ -135,7 +134,7 @@ export const login = (username, password) => async (dispatch) => {
 
   try {
     await axios
-      .post("http://112.221.126.139:10000/api/testing/jwt/create/", {
+      .post("http://192.168.123.10:5000/api/testing/jwt/create/", {
         username: username,
         password: password,
         config,
@@ -169,7 +168,7 @@ export const signup =
   async (dispatch) => {
     try {
       await axios
-        .post("http://112.221.126.139:10000/api/testing/users/", {
+        .post("http://192.168.123.10:5000/api/testing/users/", {
           username: username,
           password: password,
           re_password: re_password,
@@ -202,7 +201,7 @@ export const verify = (uid, token) => async (dispatch) => {
 
   try {
     await axios.post(
-      "http://112.221.126.139:10000/api/testing/users/activation/",
+      "http://192.168.123.10:5000/api/testing/users/activation/",
       {
         uid: uid,
         token: token,
@@ -228,7 +227,7 @@ export const reset_password = (email) => async (dispatch) => {
 
   try {
     await axios.post(
-      `http://112.221.126.139:10000/api/testing/users/reset_password/`,
+      `http://192.168.123.10:5000/api/testing/users/reset_password/`,
       {
         email: email,
         config,
@@ -254,7 +253,7 @@ export const Find_Id = (email) => async (dispatch) => {
 
   try {
     await axios.post(
-      `http://112.221.126.139:10000/api/testing/users/reset_username/`,
+      `http://192.168.123.10:5000/api/testing/users/reset_username/`,
       {
         email: email,
         config,
@@ -281,7 +280,7 @@ export const reset_password_confirm =
 
     try {
       await axios.post(
-        `http://112.221.126.139:10000/api/testing/users/reset_password_confirm/`,
+        `http://192.168.123.10:5000/api/testing/users/reset_password_confirm/`,
         {
           uid: uid,
           token: token,
@@ -301,8 +300,9 @@ export const reset_password_confirm =
     }
   };
 
-export const logout = () => (dispatch) => {
-  dispatch({
-    type: LOGOUT,
+export const logout = () => async (dispatch) => {
+  await dispatch({
+    // type: LOGOUT,
   });
+  // window.location.replace("/login");
 };

@@ -1,7 +1,6 @@
 aside {
   width: 20%;
   height: 100%;
-  // background-color: #ffd801;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -15,6 +14,7 @@ aside {
     background-color: white;
     text-align: center;
     margin: auto;
+    overflow-y: auto;
     .task {
       border-bottom: 2px solid black;
       padding: 5px 0;
@@ -22,6 +22,7 @@ aside {
         font-size: 20px;
         color: #333;
         margin-bottom: 0;
+        font-size: 25px;
       }
     }
   }
@@ -36,7 +37,6 @@ aside {
       width: 30%;
       background-color: white;
       border: 2px solid #49277f;
-      // border: none;
       border-radius: 10px;
       font-size: 15px;
       color: #333;

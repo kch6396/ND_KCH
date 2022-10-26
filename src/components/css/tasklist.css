@@ -1,0 +1,22 @@
+.tasklists {
+  width: 100%;
+  display: flex;
+}
+
+.tasklist {
+  display: block;
+  width: 100%;
+  color: #777;
+  padding: 5px 0;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.tasklist:hover {
+  color: #333;
+}
+
+.taskcheck {
+  width: 30%;
+  border: 0px solid white;
+}

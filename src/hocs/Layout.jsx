@@ -5,11 +5,9 @@ import { checkAuthenticated, load_user, refreshToken } from "../actions/auth";
 import Footer from "../components/Footer";
 
 const Layout = (props) => {
-  console.log("Layout2");
   useEffect(() => {
-    console.log("Layout");
-    props.checkAuthenticated();
     props.refreshToken();
+    props.checkAuthenticated();
     props.load_user();
   }, [props]);
 

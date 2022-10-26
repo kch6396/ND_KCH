@@ -25,6 +25,7 @@ const initialState = {
   refresh: localStorage.getItem("refresh"),
   isAuthenticated: null,
   user: {
+    id: localStorage.getItem("id"),
     company: localStorage.getItem("company"),
     email: localStorage.getItem("email"),
     name: localStorage.getItem("name"),
@@ -70,6 +71,7 @@ export default function (state = initialState, action) {
       };
     case USER_LOADED_SUCCESS:
       console.log(USER_LOADED_SUCCESS, state);
+      localStorage.setItem("id", payload.id);
       localStorage.setItem("company", payload.company);
       localStorage.setItem("email", payload.email);
       localStorage.setItem("name", payload.name);
@@ -100,6 +102,7 @@ export default function (state = initialState, action) {
     case LOGIN_FAIL:
     case SIGNUP_FAIL:
     case LOGOUT:
+      localStorage.removeItem("id");
       localStorage.removeItem("access");
       localStorage.removeItem("refresh");
       localStorage.removeItem("company");

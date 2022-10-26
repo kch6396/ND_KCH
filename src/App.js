@@ -34,9 +34,12 @@ function App() {
             />
             <Route path="/activation/:uid/:token" element={<Activate />} />
             <Route path="/mainPage" element={<MainPage />} />
-            <Route path="/chart" element={<AsideChart />}></Route>
-            <Route path="/process" element={<AsideProcess />}></Route>
-            <Route path="/Upload" element={<AsideLoad />}></Route>
+            {/* <Route path="/task/:id/chart" element={<AsideChart />}></Route> */}
+            {/* <Route path="/task/:id/process" element={<AsideProcess />}></Route> */}
+            {/* <Route path="/task/:id/upload" element={<AsideLoad />}></Route> */}
+            <Route path="/task/chart" element={<AsideChart />}></Route>
+            <Route path="/task/process" element={<AsideProcess />}></Route>
+            <Route path="/task/upload" element={<AsideLoad />}></Route>
           </Routes>
         </Layout>
       </Router>
