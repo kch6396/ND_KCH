@@ -1,5 +1,6 @@
 import React, { PureComponent } from "react";
 import styles from "./chart.module.css";
+import "./chart.css";
 import {
   BarChart,
   Bar,
@@ -18,36 +19,36 @@ const barColors = [
   "#2E75D8",
   "#1F57B5",
   "#143D92",
-  "#0C2A78",
+  // "#0C2A78",
 ];
 
-const data = [
+export const data1 = [
+  // {
+  //   name: "Origin",
+  //   Performance: 95,
+  // },
   {
     name: "Origin",
-    Performance: 95,
-  },
-  {
-    name: "A",
     Performance: 94,
   },
   {
-    name: "B",
+    name: "A",
     Performance: 93,
   },
   {
-    name: "C",
+    name: "B",
     Performance: 96,
   },
   {
-    name: "D",
+    name: "C",
     Performance: 95.5,
   },
   {
-    name: "E",
+    name: "D",
     Performance: 90,
   },
   {
-    name: "F",
+    name: "E",
     Performance: 50,
   },
 ];
@@ -57,11 +58,16 @@ export default class Performance extends PureComponent {
     return (
       <div className={styles.one}>
         <h1 className={styles.title}>Performance 비교</h1>
-        <ResponsiveContainer width="100%" height={200}>
+        {/* <ResponsiveContainer width="100%" height={200}> */}
+        <ResponsiveContainer
+          width="100%"
+          height="75%"
+          className={styles.chartsize}
+        >
           <BarChart
             width={500}
             height={300}
-            data={data}
+            data={data1}
             margin={{
               top: 5,
               right: 30,
@@ -74,20 +80,20 @@ export default class Performance extends PureComponent {
               padding={{ left: 40, right: 40 }}
             />
             <YAxis />
-            <Tooltip
+            {/* <Tooltip
               contentStyle={{
                 backgroundColor: "#D8F1FE",
                 border: "3px solid #8BCBFE",
                 borderRadius: "5px",
               }}
-            />
+            /> */}
             <CartesianGrid strokeDasharray="3 3" />
             <Bar
               dataKey="Performance"
               background={{ fill: "#eee" }}
               label={{ position: "insideTop", fill: "white" }}
             >
-              {data.map((entry, index) => (
+              {data1.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={barColors[index % 20]} />
               ))}
             </Bar>

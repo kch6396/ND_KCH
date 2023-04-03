@@ -18,36 +18,36 @@ const barColors = [
   "#DB1D1D",
   "#B71421",
   "#930C22",
-  "#7A0723",
+  // "#7A0723",
 ];
 
-const data = [
+export const data2 = [
+  // {
+  //   name: "Origin",
+  //   Performance: 1.7,
+  // },
   {
     name: "Origin",
-    Performance: 1.7,
-  },
-  {
-    name: "A",
     Performance: 1.65,
   },
   {
-    name: "B",
+    name: "A",
     Performance: 1.1,
   },
   {
-    name: "C",
+    name: "B",
     Performance: 1.67,
   },
   {
-    name: "D",
+    name: "C",
     Performance: 1.2,
   },
   {
-    name: "E",
+    name: "D",
     Performance: 0.85,
   },
   {
-    name: "F",
+    name: "E",
     Performance: 0.45,
   },
 ];
@@ -57,11 +57,16 @@ export default class Parameter extends PureComponent {
     return (
       <div className={styles.one}>
         <h1 className={styles.title}>Parameter 수 비교</h1>
-        <ResponsiveContainer width="100%" height={200}>
+        {/* <ResponsiveContainer width="100%" height={200}> */}
+        <ResponsiveContainer
+          width="100%"
+          height="75%"
+          className={styles.chartsize}
+        >
           <BarChart
             width={500}
             height={300}
-            data={data}
+            data={data2}
             margin={{
               top: 5,
               right: 30,
@@ -74,20 +79,20 @@ export default class Parameter extends PureComponent {
               padding={{ left: 40, right: 40 }}
             />
             <YAxis />
-            <Tooltip
+            {/* <Tooltip
               contentStyle={{
                 backgroundColor: "#FFE5D3",
                 border: "3px solid #FFC5A9",
                 borderRadius: "5px",
               }}
-            />
+            /> */}
             <CartesianGrid strokeDasharray="3 3" />
             <Bar
               dataKey="Performance"
               background={{ fill: "#eee" }}
               label={{ position: "insideTop", fill: "white" }}
             >
-              {data.map((entry, index) => (
+              {data2.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={barColors[index % 20]} />
               ))}
             </Bar>

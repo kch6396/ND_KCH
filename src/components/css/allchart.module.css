@@ -1,36 +1,32 @@
 .theme {
   list-style-type: none;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: bold;
   text-align: center;
-  padding: 20px;
+  padding: 15px;
+  white-space: nowrap;
 }
-
+.tasktitle {
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 40%);
+}
 .allchart {
-  width: 80%;
+  width: 100%;
+  height: 100%;
 }
 .chart1 {
   display: flex;
-  margin-bottom: 30px;
+  margin-bottom: 15px;
+  height: 35%;
 }
 .chart2 {
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
+  height: 35%;
 }
 
-.btns input {
-  width: 130px;
-  padding: 12px;
-  border: 3px solid #337ab7;
-  border-radius: 0.25em;
+.btns button {
   font-weight: 700;
   float: right;
   margin-right: 50px;
-  background-color: #337ab7;
   color: white;
-}
-
-.btns input:hover {
-  background-color: #2e6da4;
-  border: 3px solid #2e6da4;
 }

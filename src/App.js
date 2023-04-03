@@ -16,15 +16,17 @@ import "./components/css/mainPage.css";
 import AsideLoad from "./components/AsideLoad";
 import AsideProcess from "./components/AsideProcess";
 import AsideChart from "./components/AsideChart";
-
+import AsideResult from "./components/AsideResult";
+import ModelCreation from "./components/ModelCreation";
+import ModelCom from "./components/ModelCom";
+import AsideCom from "./components/AsideCom";
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Layout>
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/FindId" element={<FindId />} />
@@ -34,12 +36,42 @@ function App() {
             />
             <Route path="/activation/:uid/:token" element={<Activate />} />
             <Route path="/mainPage" element={<MainPage />} />
-            {/* <Route path="/task/:id/chart" element={<AsideChart />}></Route> */}
-            {/* <Route path="/task/:id/process" element={<AsideProcess />}></Route> */}
-            {/* <Route path="/task/:id/upload" element={<AsideLoad />}></Route> */}
-            <Route path="/task/chart" element={<AsideChart />}></Route>
-            <Route path="/task/process" element={<AsideProcess />}></Route>
-            <Route path="/task/upload" element={<AsideLoad />}></Route>
+            <Route path="/modelCreation" element={<ModelCreation />}></Route>
+            <Route path="/modelCompress" element={<ModelCom />}></Route>
+
+            <Route
+              path="/modelCreation/task/:id/result"
+              element={<AsideResult />}
+            ></Route>
+            <Route
+              path="/modelCreation/task/:id/chart"
+              element={<AsideChart />}
+            ></Route>
+            <Route
+              path="/modelCreation/task/:id/process"
+              element={<AsideProcess />}
+            ></Route>
+            <Route
+              path="/modelCreation/task/:id/upload"
+              element={<AsideLoad />}
+            ></Route>
+
+            <Route
+              path="/modelCompress/task/:id/result"
+              element={<AsideResult />}
+            ></Route>
+            <Route
+              path="/modelCompress/task/:id/chart"
+              element={<AsideChart />}
+            ></Route>
+            <Route
+              path="/modelCompress/task/:id/process"
+              element={<AsideProcess />}
+            ></Route>
+            <Route
+              path="/modelCompress/task/:id/upload"
+              element={<AsideCom />}
+            ></Route>
           </Routes>
         </Layout>
       </Router>

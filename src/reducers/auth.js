@@ -100,6 +100,7 @@ export default function (state = initialState, action) {
         user: null,
       };
     case LOGIN_FAIL:
+
     case SIGNUP_FAIL:
     case LOGOUT:
       localStorage.removeItem("id");

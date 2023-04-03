@@ -1,0 +1,72 @@
+.result_wrapper {
+  width: 100%;
+  height: 100%;
+  min-width: 1000px;
+}
+.tasktitle {
+  -webkit-box-shadow: 0 2px 5px 0 rgb(0 0 0 / 40%);
+}
+.resultPage {
+  width: 100%;
+  height: 90%;
+  position: relative;
+  margin: auto;
+}
+.resultchart {
+  position: absolute;
+  height: 90%;
+  width: 80%;
+  top: 10%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: auto;
+}
+.btnplace {
+  position: absolute;
+  /* height: 20%; */
+  bottom: 15px;
+  width: 100%;
+}
+
+.down {
+  width: 8%;
+  padding: 0.8%;
+  border-radius: 0.25em;
+  background-color: #337ab7;
+  border: 3px solid #337ab7;
+  cursor: pointer;
+  font-weight: 700;
+  float: right;
+  margin-right: 50px;
+  color: white;
+}
+.down:hover {
+  background-color: #2e6da4;
+  border: 3px solid #2e6da4;
+}
+.down:focus {
+  outline: none;
+}
+.prev {
+  width: 8%;
+  padding: 0.8%;
+  border-radius: 0.25em;
+  background-color: #d9534f;
+  border: 3px solid #d9534f;
+  cursor: pointer;
+  font-weight: 700;
+  float: right;
+  margin-right: 50px;
+  color: white;
+}
+.prev:hover {
+  background-color: #d43f3a;
+  border: 3px solid #d43f3a;
+}
+.prev:focus {
+  outline: none;
+}
+.recharts-surface {
+  overflow: visible !important;
+}

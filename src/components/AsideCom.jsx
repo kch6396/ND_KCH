@@ -1,13 +1,13 @@
 import Aside from "./Aside";
-import Upload from "./Upload";
+import Compress from "./Compress";
 
 import "./css/AsideLoad.css";
-
-export default function AsideLoad() {
+import Timer from "../components/Timer";
+export default function AsideCom() {
   return (
     <div className="Asideupload">
       {/* <Aside /> */}
-      <Upload />
+      <Compress />
     </div>
   );
 }

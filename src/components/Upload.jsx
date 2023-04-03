@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useNavigate } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation } from "react-router-dom";
 import styles from "./css/upload.module.css";
 import $, { error } from "jquery";
 import axios from "axios";
@@ -7,7 +7,7 @@ import "./css/upload.css";
 import { connect } from "react-redux/es/exports";
 import { logout } from "../actions/auth";
 import useFetch from "../hocs/useFetch";
-
+import TaskChoise from "./TaskChoice";
 var xfilesArr = [];
 var yfilesArr = [];
 var xstate = [];
@@ -26,15 +26,19 @@ var z = 0;
 var w = 0;
 var m = 0;
 var n = 0;
-
+var xcomplete = 0;
+var ycomplete = 0;
 const xformData = new FormData();
 const yformData = new FormData();
 const checkboxes1 = document.getElementsByName("check1");
 const checkboxes2 = document.getElementsByName("check2");
 var idi = 0;
 var companyid = 0;
-
+var yfilenone = 1;
 const Upload = ({ logout }) => {
+  const ref = useRef();
+  const location = useLocation();
+  var [state, setState] = useState("");
   window.onload = function () {
     if (!window.location.hash) {
       window.location = window.location + `/task/${idi}`;
@@ -43,9 +47,10 @@ const Upload = ({ logout }) => {
   };
 
   const taskcheck = useParams().id;
+  console.log(taskcheck);
   const [id, setId] = useState(`${localStorage.getItem("id")}`);
   const tasks = useFetch(
-    `http://112.221.126.139:10000/api/Testing/${id}/${taskcheck}`
+    `http://192.168.123.2:6600/api/TaskAdmin/${taskcheck}`
   );
   const [checkBox, setCheckBox] = useState(tasks.id);
 
@@ -64,6 +69,12 @@ const Upload = ({ logout }) => {
   ];
 
   useEffect(() => {
+    if (location.pathname.indexOf("Creation") !== -1) {
+      setState("modelCreation");
+    } else if (location.pathname.indexOf("Compress") !== -1) {
+      setState("modelCompress");
+    }
+    console.log(xcomplete, ycomplete);
     if (taskcheck !== checkBox) {
       $(".xfile-list").empty();
       $(".yfile-list").empty();
@@ -108,7 +119,7 @@ const Upload = ({ logout }) => {
       console.log("JSON", body);
       try {
         const res = await axios.post(
-          `http://192.168.123.10:5000/api/testing/jwt/verify/`,
+          `http://192.168.123.2:6600/api/testing/jwt/verify/`,
           body,
           config
         );
@@ -141,6 +152,25 @@ const Upload = ({ logout }) => {
     xformData.append("Checkbox2", target.value);
     yformData.append("Checkbox2", target.value);
     console.log(target.value);
+    if (target.value === "정답지 부재(UnSupversied)") {
+      yfilenone = 0;
+      console.log(yfilenone);
+      $(".yfile-list").empty();
+      $("#yfile_label").hide();
+      yfilesArr = [];
+      console.log(yfilesArr);
+      ystate = [];
+      yfileNo = 0;
+      ydel = 0;
+      ysuc = 0;
+      k = 0;
+      v = 0;
+      m = 0;
+    } else {
+      yfilenone = 1;
+      console.log(yfilenone);
+      $("#yfile_label").show();
+    }
   };
 
   const checkeditemHandler1 = (box, id, isChecked1) => {
@@ -165,58 +195,81 @@ const Upload = ({ logout }) => {
     }
   };
 
-  xformData.append("company_id", tasks.company_id);
-  xformData.append("Taskname", tasks.Taskname);
-  xformData.append("state", tasks.state);
-
-  yformData.append("company_id", tasks.company_id);
-  yformData.append("Taskname", tasks.Taskname);
-  yformData.append("state", tasks.state);
-
+  // xformData.append("company_id", tasks.company_id);
+  // xformData.append("Taskname", tasks.Taskname);
+  // xformData.append("state", tasks.state);
+  xformData.append("taskId", idi);
+  xformData.append("userId", `${localStorage.getItem("id")}`);
+  // yformData.append("company_id", tasks.company_id);
+  // yformData.append("Taskname", tasks.Taskname);
+  // yformData.append("state", tasks.state);
+  yformData.append("taskId", idi);
+  yformData.append("userId", `${localStorage.getItem("id")}`);
   return (
     <div className={`${styles.file_wrapper} ${styles.flie_wrapper_area}`}>
-      <div className="notice">
-        ※ 파일을 업로드 중 페이지를 나가시면 업로드가 중단됩니다.
-      </div>
-      <div className="checkbox1">
-        <div className="firstcheck">1. </div>
-        {firstData.map((item) => (
-          <label key={item.id} className="innerBox">
-            <input
-              type="checkbox"
-              name="check1"
-              className="checkrec"
-              value={item.name}
-              onChange={(e) => checkHandler1(e)}
-              disabled=""
-            />
-            <div className="checkname">{item.name}</div>
-          </label>
-        ))}
-      </div>
+      <form id="form">
+        <div className={styles.task}>
+          <h2
+            style={{
+              width: "100%",
+              fontSize: "20px",
+              paddingLeft: "10px",
+              padding: "17px 20px",
+              // color: "white",
+              color: "#49277f",
+              // backgroundColor: "#D3D3D3",
+              marginBottom: "0px",
+              fontWeight: "bold",
+              cursor: "default",
+            }}
+            className={styles.tasktitle}
+          >
+            {tasks.taskname}
+          </h2>
+          <TaskChoise />
+        </div>
+        <div className="notice">
+          ※ 파일을 업로드 중 페이지를 나가시면 업로드가 중단됩니다.
+        </div>
+        <div className="checkbox1">
+          <div className="firstcheck">1. </div>
+          {firstData.map((item) => (
+            <label key={item.id} className="innerBox">
+              <input
+                type="checkbox"
+                name="check1"
+                className="checkrec"
+                value={item.name}
+                onChange={(e) => checkHandler1(e)}
+                disabled=""
+              />
+              <div className="checkname">{item.name}</div>
+            </label>
+          ))}
+        </div>
 
-      <div className="checkbox2">
-        <div className="secondcheck">2. </div>
-        {secondData.map((item) => (
-          <label key={item.id} className="innerBox">
-            <input
-              type="checkbox"
-              name="check2"
-              className="checkrec"
-              value={item.name}
-              onChange={(e) => checkHandler2(e)}
-              disabled=""
-            />
-            <div className="checkname">{item.name}</div>
-          </label>
-        ))}
-      </div>
+        <div className="checkbox2">
+          <div className="secondcheck">2. </div>
+          {secondData.map((item) => (
+            <label key={item.id} className="innerBox">
+              <input
+                type="checkbox"
+                name="check2"
+                className="checkrec"
+                value={item.name}
+                onChange={(e) => checkHandler2(e)}
+                disabled=""
+              />
+              <div className="checkname">{item.name}</div>
+            </label>
+          ))}
+        </div>
 
-      <div className={styles.float_left}>
-        <span className={styles.label_plus}>
-          <i className={`${styles.fas} ${styles.fa_plus}`}></i>
-        </span>
-        <form id="form">
+        <div className={styles.float_left}>
+          <span className={styles.label_plus}>
+            <i className={`${styles.fas} ${styles.fa_plus}`}></i>
+          </span>
+
           <div className={styles.files}>
             <div className={styles.filebox} id="filebox1">
               <div className={styles.btns1}>
@@ -237,9 +290,12 @@ const Upload = ({ logout }) => {
               />
               <div className="xfile-list"></div>
             </div>
+
             <div className={styles.filebox} id="filebox2">
               <div className={styles.btns1}>
-                <label htmlFor="yfile">YFile Upload</label>
+                <label id="yfile_label" htmlFor="yfile">
+                  YFile Upload
+                </label>
                 <div id="preview2"></div>
                 <div
                   className={styles.file_edit_icon1}
@@ -254,6 +310,15 @@ const Upload = ({ logout }) => {
                 multiple="multiple"
                 disabled=""
               />
+
+              {/* <input
+                type="file"
+                name="file"
+                id="yfile"
+                className={`${styles.upload_box} ${styles.upload_plus}`}
+                multiple="multiple"
+                disabled="" */}
+              {/* /> */}
               <div className="yfile-list"></div>
             </div>
           </div>
@@ -269,9 +334,14 @@ const Upload = ({ logout }) => {
             <button id="reset_btn" className="resetbtn" disabled="disabled">
               CANCEL
             </button>
+            <Link to={`/${state}/task/${tasks.id}/process`}>
+              <button id="ok_btn" className="okbtn" disabled="disabled">
+                Running AI
+              </button>
+            </Link>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };
@@ -319,7 +389,8 @@ $(function () {
         reader.readAsDataURL(file);
       }
     }
-    document.querySelector("input[type=file]").value = "";
+    document.querySelector("input[id=xfile]").value = "";
+    // $("#xfile").val = "";
   });
 });
 
@@ -361,7 +432,8 @@ $(function () {
         reader.readAsDataURL(file);
       }
     }
-    document.querySelector("input[type=file]").value = "";
+    document.querySelector("input[id=yfile]").value = "";
+    // $("#yfile").val = "";
   });
 });
 
@@ -406,6 +478,16 @@ $(function () {
   form.addEventListener(
     "submit",
     (window.onload = function (e) {
+      axios
+        .delete(`http://192.168.123.2:6600/api/File/${idi}`, {})
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      console.log(xfilesArr);
+      console.log(yfilesArr);
       const CancelToken = axios.CancelToken;
       let source = CancelToken.source();
       var xdeletefile = 0;
@@ -416,7 +498,7 @@ $(function () {
       w = 0;
       for (var i = 0; i < xfilesArr.length; i++) {
         if (!xfilesArr[i].is_delete) {
-          xformData.append("File", xfilesArr[i]);
+          xformData.append("fileInput", xfilesArr[i]);
           xformData.append("FileType", "X");
           const xlabel = document.createElement("label");
           xlabel.setAttribute("htmlFor", `xprogress-bar[${i}]`);
@@ -448,6 +530,7 @@ $(function () {
                 if (xpercentCompleted === 100) {
                   xprogress.previousElementSibling.textContent = `Upload complete!`;
                   $("#ok__btn").attr("disabled", false);
+                  // $(".resetbtn").remove();
                 }
               },
 
@@ -456,7 +539,8 @@ $(function () {
 
             axios
               .post(
-                `http://112.221.126.139:10000/api/Testing/${companyid}/${idi}`,
+                // `http://192.168.123.2:6600/api/Testing/${companyid}/${idi}`,
+                `http://192.168.123.2:6600/api/File/${idi}`,
                 xformData,
                 xconfig,
                 { headers: { "Content-Type": "multipart/form-data" } }
@@ -472,12 +556,21 @@ $(function () {
                   xsuc + xdel === xstate.length &&
                   ysuc + ydel === ystate.length
                 ) {
-                  window.location.replace(`/task/${idi}/process`);
+                  xcomplete = 1;
+                  // window.location.replace(`/task/${idi}/process`);
                   $("#ok__btn").attr("disabled", false);
+                  $("#ok__btn").attr("disabled", false);
+                  if (xcomplete + ycomplete === 1) {
+                    $(".resetbtn").remove();
+                    $("#ok__btn").remove();
+                    $("#ok_btn").attr("disabled", false);
+                    $(".xprogress-bar").remove();
+                  }
                 }
               })
               .catch((err) => {
                 console.log(err);
+                xcomplete = 0;
                 xsuc = 0;
                 ysuc = 0;
                 xstate[w] = 0;
@@ -493,7 +586,7 @@ $(function () {
       v = 0;
       for (var j = 0; j < yfilesArr.length; j++) {
         if (!yfilesArr[j].is_delete) {
-          yformData.append("File", yfilesArr[j]);
+          yformData.append("fileInput", yfilesArr[j]);
           yformData.append("FileType", "Y");
           const ylabel = document.createElement("label");
           ylabel.setAttribute("htmlFor", `yprogress-bar[${j}]`);
@@ -524,7 +617,8 @@ $(function () {
                 yprogress.previousElementSibling.textContent = `${ypercentCompleted}%`;
                 if (ypercentCompleted === 100) {
                   yprogress.previousElementSibling.textContent = `Upload complete!`;
-                  $("#yprogress-bar[1]").remove();
+                  $(".yprogress-bar").remove();
+                  // $(".resetbtn").remove();
                 }
               },
 
@@ -532,7 +626,8 @@ $(function () {
             };
             axios
               .post(
-                `http://112.221.126.139:10000/api/Testing/${companyid}/${idi}`,
+                // `http://192.168.123.2:6600/api/Testing/${companyid}/${idi}`,
+                `http://192.168.123.2:6600/api/File/${idi}`,
                 yformData,
                 yconfig,
                 { headers: { "Content-Type": "multipart/form-data" } }
@@ -548,12 +643,20 @@ $(function () {
                   xsuc + xdel === xstate.length &&
                   ysuc + ydel === ystate.length
                 ) {
-                  window.location.replace(`/task/${idi}/process`);
+                  ycomplete = 1;
+                  // window.location.replace(`/task/${idi}/process`);
                   $("#ok__btn").attr("disabled", false);
+                  if (xcomplete + ycomplete === 1) {
+                    $(".resetbtn").remove();
+                    $("#ok__btn").remove();
+                    $("#ok_btn").attr("disabled", false);
+                    $(".yprogress-bar").remove();
+                  }
                 }
               })
               .catch((err) => {
                 console.log(err);
+                ycomplete = 0;
                 ystate[v] = 0;
                 xsuc = 0;
                 ysuc = 0;
@@ -568,6 +671,8 @@ $(function () {
       $("#reset_btn").on("click", function () {
         source.cancel("Operation canceled by the user.");
         source = CancelToken.source();
+        console.log(`${idi}`);
+
         $(".xprogressbar").remove();
         $(".yprogressbar").remove();
         $(".xlabel").remove();
@@ -601,7 +706,15 @@ $(function () {
 $(function () {
   checkcnt1 = 0;
   checkcnt2 = 0;
+  var xdelfile = 0;
+  var ydelfile = 0;
   $("#ok__btn").on("click", function () {
+    ydelfile = 0;
+    xdelfile = 0;
+    // if (xcomplete + ycomplete === 2) {
+
+    // $("#reset_btn").remove();
+    // }
     for (let i = 0; i < checkboxes1.length; i++) {
       if (checkboxes1[i].checked === false) {
         checkcnt1++;
@@ -628,7 +741,7 @@ $(function () {
       checkcnt2 = 0;
       $(".checkrec").attr("disabled", true);
     }
-
+    console.log(ydelfile);
     // if (checkcnt2 === 2) {
     //   console.log("hi");
     //   checkcnt2 = 0;
@@ -638,8 +751,7 @@ $(function () {
     //   checkcnt2 = 0;
     //   $(".checkrec").attr("disabled", true);
     // }
-    var xdelfile = 0;
-    var ydelfile = 0;
+
     for (var i = 0; i < xfilesArr.length; i++) {
       if (xfilesArr[i].is_delete) {
         xdelfile++;
@@ -650,10 +762,29 @@ $(function () {
         ydelfile++;
       }
     }
+    // if (yfilenone === 0) {
+    //   $(".yfile-list").empty();
+    //   yfilesArr = [];
+    //   console.log(yfilesArr);
+    //   ystate = [];
+    //   yfileNo = 0;
+    //   ydel = 0;
+    //   ysuc = 0;
+    //   k = 0;
+    //   v = 0;
+    //   m = 0;
+    //   ystate.length = 0;
+    // }
     if (!yfilesArr.length || yfilesArr.length === ydelfile) {
-      alert("파일을 첨부해주세요.");
-      $(".checkrec").attr("disabled", false);
-      return false;
+      //alert("파일을 첨부해주세요.");
+      //$(".checkrec").attr("disabled", false);
+      if (yfilenone === 1) {
+        alert("파일을 첨부해주세요.");
+        $(".checkrec").attr("disabled", false);
+        return false;
+      } else {
+        return true;
+      } //return false;
     } else if (!xfilesArr.length || xfilesArr.length === xdelfile) {
       alert("파일을 첨부해주세요.");
       $(".checkrec").attr("disabled", false);

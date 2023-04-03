@@ -5,7 +5,7 @@ import { logout } from "../actions/auth";
 import { connect } from "react-redux";
 import Aside from "./Aside";
 
-const mainPage = ({ logout }) => {
+const ModelCom = ({ logout }) => {
   const check = async () => {
     if (localStorage.getItem("access")) {
       const config = {
@@ -35,10 +35,10 @@ const mainPage = ({ logout }) => {
   };
   check();
 
-  return <>{/*<Section />*/}</>;
+  return <>{<Section />}</>;
 };
 const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { logout })(mainPage);
+export default connect(mapStateToProps, { logout })(ModelCom);

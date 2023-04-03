@@ -1,6 +1,6 @@
 .title {
   text-align: center;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .sub {
@@ -15,4 +15,5 @@
   margin: auto;
   width: 45%;
   min-width: 500px;
+  height: 100%;
 }

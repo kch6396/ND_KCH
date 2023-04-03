@@ -1,11 +1,11 @@
 import Aside from "./Aside";
-import Process from "./Process";
+import Result from "./Result";
 
 export default function AsideProcess() {
   return (
     <div className="Asideupload">
       {/* <Aside /> */}
-      <Process />
+      <Result />
     </div>
   );
 }

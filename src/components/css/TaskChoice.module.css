@@ -1,0 +1,71 @@
+.selectWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 30px;
+  position: absolute;
+  right: 0;
+  z-index: 10;
+  top: 14.5px;
+}
+.selectBtn {
+  border: none;
+  background-color: white;
+  border-radius: 3px;
+  width: 150px;
+  height: 50%;
+  outline: none;
+  font-size: 18px;
+  display: flex;
+  /* justify-content: center; */
+  justify-content: space-between;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #bebebe;
+}
+.selectBtn:focus {
+  outline: none;
+}
+.optionWrapper {
+  /* position: absolute; */
+}
+.taskName {
+  line-height: 27px;
+  font-weight: 500;
+  color: #bebebe;
+}
+.state {
+  background-color: #bebebe;
+  border-radius: 20px;
+  color: white;
+  padding: 1px 10px;
+  font-size: 14px;
+  position: relative;
+  top: 0;
+  bottom: 0;
+  margin: auto 0;
+  margin-right: 10px;
+  width: 65px;
+  font-weight: 500;
+}
+.taskUl {
+  border-radius: 3px;
+  outline: 2px solid #49277f;
+  background-color: white;
+  max-width: 150px;
+  overflow: auto;
+  max-height: 165px;
+}
+.targetTask {
+  display: flex;
+  width: 100%;
+  /* justify-content: center;/ */
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  outline: none;
+  white-space: nowrap;
+}

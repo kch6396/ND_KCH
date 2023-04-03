@@ -18,36 +18,36 @@ const barColors = [
   "#29A438",
   "#1C8933",
   "#126E2D",
-  "#0A5B29",
+  // "#0A5B29",
 ];
 
-const data = [
+export const data3 = [
+  // {
+  //   name: "Origin",
+  //   Performance: 15,
+  // },
   {
     name: "Origin",
-    Performance: 15,
-  },
-  {
-    name: "A",
     Performance: 13,
   },
   {
-    name: "B",
+    name: "A",
     Performance: 9,
   },
   {
-    name: "C",
+    name: "B",
     Performance: 15,
   },
   {
-    name: "D",
+    name: "C",
     Performance: 11,
   },
   {
-    name: "E",
+    name: "D",
     Performance: 8.5,
   },
   {
-    name: "F",
+    name: "E",
     Performance: 7,
   },
 ];
@@ -57,11 +57,16 @@ export default class Size extends PureComponent {
     return (
       <div className={styles.one}>
         <h1 className={styles.title}>Size(파일크기) 비교</h1>
-        <ResponsiveContainer width="100%" height={200}>
+        {/* <ResponsiveContainer width="100%" height={200}> */}
+        <ResponsiveContainer
+          width="100%"
+          height="75%"
+          className={styles.chartsize}
+        >
           <BarChart
             width={500}
             height={300}
-            data={data}
+            data={data3}
             margin={{
               top: 5,
               right: 30,
@@ -74,13 +79,13 @@ export default class Size extends PureComponent {
               padding={{ left: 40, right: 40 }}
             />
             <YAxis />
-            <Tooltip
+            {/* <Tooltip
               contentStyle={{
                 backgroundColor: "#E3FBD8",
                 border: "3px solid #C3F8B2",
                 borderRadius: "5px",
               }}
-            />
+            /> */}
             <CartesianGrid strokeDasharray="3 3" />
             <Bar
               dataKey="Performance"
@@ -88,7 +93,7 @@ export default class Size extends PureComponent {
               background={{ fill: "#eee" }}
               label={{ position: "insideTop", fill: "white" }}
             >
-              {data.map((entry, index) => (
+              {data3.map((entry, index) => (
                 <Cell key={`cell-${index}`} fill={barColors[index % 20]} />
               ))}
             </Bar>

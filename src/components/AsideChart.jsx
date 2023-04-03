@@ -4,7 +4,7 @@ import Chart from "./Chart";
 export default function AsideChart() {
   return (
     <div className="Asideupload">
-      <Aside />
+      {/* <Aside /> */}
       <Chart />
     </div>
   );

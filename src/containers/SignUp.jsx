@@ -39,13 +39,12 @@ const Signup = ({ signup, isAuthenticated }) => {
   }
 
   const onChangePhoneNumber = (e) => {
-    setTermError(false);
     setPhoneNumber(e.target.value);
   };
 
   function onSubmit(e) {
     e.preventDefault();
-    if (passwordChk && isValidPassword === true && termError === true) {
+    if (passwordChk && isValidPassword === true) {
       signup(
         username,
         password,
@@ -56,6 +55,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         name,
         email
       );
+      console.log("onSubmit");
       setAccountCreated(true);
     }
   }
@@ -82,7 +82,7 @@ const Signup = ({ signup, isAuthenticated }) => {
       return navigate("/");
     }
     if (accountCreated) {
-      return navigate("/login");
+      return navigate("/mainPage");
     }
   }, [navigate, isAuthenticated, accountCreated, phoneNumber]);
 
@@ -110,7 +110,7 @@ const Signup = ({ signup, isAuthenticated }) => {
             placeholder="password"
             name="password"
             value={password}
-            onChange={onChange}
+            onChange={onChangePChk}
             minLength="6"
             required
           />
@@ -197,7 +197,7 @@ const Signup = ({ signup, isAuthenticated }) => {
         </button>
       </form>
       <p className="mt-3">
-        Already have an account? <Link to="/login">Sign In</Link>
+        Already have an account? <Link to="/">Sign In</Link>
       </p>
     </div>
   );
